@@ -8,12 +8,17 @@ class Verify extends VerifyPassword {
         try {
             Pane tempPane = FXMLLoader.load(getClass().getResource("verifyPassword.fxml"));
             VerifyPassword.tempStage = new Stage();
-            VerifyPassword.tempStage.setScene(new Scene(tempPane, 1000, 600));
+            VerifyPassword.tempStage.setScene(new Scene(tempPane, 600, 400));
             VerifyPassword.tempStage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return VerifyPassword.result;
+        if (VerifyPassword.result) {
+            VerifyPassword.result = false;
+            return true;
+        }
+
+        return false;
     }
 }

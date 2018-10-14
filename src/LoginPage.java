@@ -22,6 +22,7 @@ public class LoginPage implements Initializable {
     static String usernameString;
     static String passwordString;
     static String bankNameString;
+    static String bankCodeString;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -57,6 +58,12 @@ public class LoginPage implements Initializable {
         usernameString = username.getText();
         passwordString = password.getText();
         bankNameString = bankName.getValue();
+
+        String query = "select bank_branch_code from employees_details where bank_name=\'" + bankNameString + "\'";
+        ResultSet sqlResult = sqlStatement.executeQuery(query);
+        if (sqlResult.next()) {
+            bankCodeString = sqlResult.getString("bank_branch_code");
+        }
 
         Pane newPane = FXMLLoader.load(getClass().getResource("homePage.fxml"));
         Main.primaryStage.setScene(new Scene(newPane, 1000, 600));

@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -44,13 +45,32 @@ public class SavingsCreateAccount implements Initializable {
             String pass = "password";
             Connection sqlConnection = DriverManager.getConnection(url, user, pass);
             Statement sqlStatement = sqlConnection.createStatement();
-            String query = "insert into user_details(name, dob, address, phone_number, email, aadhar_number) values" +
+
+//            String accountNumber = "6049" + LoginPage.bankCodeString;
+
+            String query = "select account_number from user_details";
+            ResultSet sqlResult = sqlStatement.executeQuery(query);
+            String temp = null;
+            while (sqlResult.next()) {
+                temp = sqlResult.getString("account_number");
+            }
+
+            String accountNumber;
+            if (null == temp) {
+                accountNumber = "6049" + LoginPage.bankCodeString + "00000001";
+            } else {
+                accountNumber = "6049" + LoginPage.bankCodeString;
+                accountNumber += accountNumberGenerator(temp.substring(8));
+            }
+
+            query = "insert into user_details(name, dob, address, phone_number, email, aadhar_number, account_number) values" +
                     "(\' " + name.getText() +"\'," +
                     "\' " + dob.getValue() + "\'," +
                     "\' " + residentialAddress1.getText() + "," + residentialAddress2.getText() + "," + residentialAddress3.getText() +  "\'," +
                     "\' " + phoneNumber.getText() + "\'," +
                     "\' " + emailAddress.getText() + "\'," +
-                    "\' " + aadharNumber.getText() + "\')";
+                    "\' " + aadharNumber.getText() + "\'," +
+                    "\' " + accountNumber + "\')";
             sqlStatement.executeUpdate(query);
 
             Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
@@ -75,5 +95,21 @@ public class SavingsCreateAccount implements Initializable {
         emailAddress.clear();
         aadharNumber.clear();
         dob.setValue(LocalDate.of(1999, 11, 4));
+    }
+
+    private String accountNumberGenerator(String prev) {
+        long val = Long.parseLong(prev);
+        ++val;
+        Long temp = val;
+        int count = 0;
+        while (temp > 0) {
+            temp /= 10;
+            ++count;
+        }
+        StringBuilder accountNumber = new StringBuilder();
+        for (int i = 0; i < 8 - count; ++i)
+            accountNumber.append(0);
+        accountNumber.append(val);
+        return accountNumber.toString();
     }
 }
