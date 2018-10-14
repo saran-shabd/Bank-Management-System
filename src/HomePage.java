@@ -31,4 +31,15 @@ public class HomePage {
             }
         }
     }
+
+    @FXML public void savingsDeleteAccount() {
+        if (new Verify().verifyPassword()) {
+            try {
+                Pane tempPane = FXMLLoader.load(getClass().getResource("savingsDeleteAccount.fxml"));
+                container.setCenter(tempPane);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

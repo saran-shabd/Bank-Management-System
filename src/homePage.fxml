@@ -21,7 +21,7 @@
                   <Menu mnemonicParsing="false" text="Savings Account">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#savingsCreateAccount" text="Create Account" />
-                        <MenuItem mnemonicParsing="false" text="Delete Account" />
+                        <MenuItem mnemonicParsing="false" onAction="#savingsDeleteAccount" text="Delete Account" />
                         <MenuItem mnemonicParsing="false" text="View Account(s)" />
                     </items>
                   </Menu>
