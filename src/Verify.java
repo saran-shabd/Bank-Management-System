@@ -3,17 +3,17 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-class Verify extends VerifyIdentity {
-    boolean checkIdentity() {
+class Verify extends VerifyPassword {
+    boolean verifyPassword() {
         try {
-            Pane tempPane = FXMLLoader.load(getClass().getResource("verifyIdentity.fxml"));
-            VerifyIdentity.tempStage = new Stage();
-            VerifyIdentity.tempStage.setScene(new Scene(tempPane, 1000, 600));
-            VerifyIdentity.tempStage.showAndWait();
+            Pane tempPane = FXMLLoader.load(getClass().getResource("verifyPassword.fxml"));
+            VerifyPassword.tempStage = new Stage();
+            VerifyPassword.tempStage.setScene(new Scene(tempPane, 1000, 600));
+            VerifyPassword.tempStage.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return VerifyIdentity.result;
+        return VerifyPassword.result;
     }
 }

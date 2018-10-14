@@ -22,7 +22,7 @@ public class HomePage {
     }
 
     @FXML public void savingsCreateAccount() {
-        if (new Verify().checkIdentity()) {
+        if (new Verify().verifyPassword()) {
             try {
                 Pane tempPane = FXMLLoader.load(getClass().getResource("savingsCreateAccount.fxml"));
                 container.setCenter(tempPane);
