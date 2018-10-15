@@ -1,8 +1,6 @@
 package loginAndHome;
 
 import verifyIdentity.*;
-import createAccount.*;
-import deleteAccount.*;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

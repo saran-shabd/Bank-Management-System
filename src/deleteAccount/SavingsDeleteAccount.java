@@ -23,13 +23,13 @@ public class SavingsDeleteAccount {
             confirmation.setContentText("Are you sure?");
             confirmation.showAndWait();
             if (confirmation.getResult() == ButtonType.OK) {
-                String url = "jdbc:mysql://localhost:3306/bank_user_details?useSSL=false";
-                String user = "root";
+                String url = "jdbc:mysql://db4free.net:3306/user_details?useSSL=false";
+                String user = "bank_user";
                 String pass = "password";
                 Connection sqlConnection = DriverManager.getConnection(url, user, pass);
                 Statement sqlStatement = sqlConnection.createStatement();
 
-                String query = "select aadhar_number from user_details where account_number = " + accountNumber.getText();
+                String query = "select aadhar_number from account_details where account_number = " + accountNumber.getText();
                 ResultSet sqlResult = sqlStatement.executeQuery(query);
 
                 if (!sqlResult.next()) {
@@ -37,14 +37,14 @@ public class SavingsDeleteAccount {
                     invalidCredentials.setContentText("Records does not exist");
                     invalidCredentials.showAndWait();
                     return;
-                } else if (sqlResult.getString("aadhar_number").equals(aadharNumber.getText())) {
+                } else if (!sqlResult.getString("aadhar_number").equals(aadharNumber.getText())) {
                     Alert invalidCredentials = new Alert(Alert.AlertType.ERROR);
                     invalidCredentials.setContentText("Records does not exist");
                     invalidCredentials.showAndWait();
                     return;
                 }
 
-                query = "delete from user_details where account_number = " + accountNumber.getText();
+                query = "delete from account_details where account_number = " + accountNumber.getText();
                 sqlStatement.executeUpdate(query);
 
 
