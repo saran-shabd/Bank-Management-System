@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="LoginPage">
+<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="loginAndHome.LoginPage">
    <center>
       <AnchorPane prefHeight="555.0" prefWidth="665.0">
          <children>

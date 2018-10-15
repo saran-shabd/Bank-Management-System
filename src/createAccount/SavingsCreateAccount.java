@@ -1,3 +1,5 @@
+package createAccount;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -6,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import loginAndHome.LoginPage;
+import loginAndHome.Main;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -40,15 +44,13 @@ public class SavingsCreateAccount implements Initializable {
         }
 
         try {
-            String url = "jdbc:mysql://localhost:3306/bank_user_details?useSSL=false";
-            String user = "root";
+            String url = "jdbc:mysql://db4free.net:3306/user_details?useSSL=false";
+            String user = "bank_user";
             String pass = "password";
             Connection sqlConnection = DriverManager.getConnection(url, user, pass);
             Statement sqlStatement = sqlConnection.createStatement();
 
-//            String accountNumber = "6049" + LoginPage.bankCodeString;
-
-            String query = "select account_number from user_details";
+            String query = "select account_number from account_details";
             ResultSet sqlResult = sqlStatement.executeQuery(query);
             String temp = null;
             while (sqlResult.next()) {
@@ -57,20 +59,22 @@ public class SavingsCreateAccount implements Initializable {
 
             String accountNumber;
             if (null == temp) {
-                accountNumber = "6049" + LoginPage.bankCodeString + "00000001";
+                accountNumber = 6049 + LoginPage.bankCodeString + "00000001";
             } else {
                 accountNumber = "6049" + LoginPage.bankCodeString;
                 accountNumber += accountNumberGenerator(temp.substring(8));
             }
 
-            query = "insert into user_details(name, dob, address, phone_number, email, aadhar_number, account_number) values" +
-                    "(\' " + name.getText() +"\'," +
-                    "\' " + dob.getValue() + "\'," +
-                    "\' " + residentialAddress1.getText() + "," + residentialAddress2.getText() + "," + residentialAddress3.getText() +  "\'," +
-                    "\' " + phoneNumber.getText() + "\'," +
-                    "\' " + emailAddress.getText() + "\'," +
-                    "\' " + aadharNumber.getText() + "\'," +
-                    "\' " + accountNumber + "\')";
+            query = "insert into account_details(name, dob, address, phone_number, email, aadhar_number, bank_branch_code, account_balance, account_number) values" +
+                    "(\'" + name.getText() +"\'," +
+                    "\'" + dob.getValue() + "\'," +
+                    "\'" + residentialAddress1.getText() + "," + residentialAddress2.getText() + "," + residentialAddress3.getText() + "\'," +
+                    "\'" + phoneNumber.getText() + "\'," +
+                    "\'" + emailAddress.getText() + "\'," +
+                    "\'" + aadharNumber.getText() + "\'," +
+                    "\'" + LoginPage.bankCodeString + "\'," +
+                    "\'" + 2000 + "\'," +
+                    "\'" + accountNumber + "\')";
             sqlStatement.executeUpdate(query);
 
             Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
@@ -78,7 +82,7 @@ public class SavingsCreateAccount implements Initializable {
             confirmation.setContentText("Account Created Successfully");
             confirmation.showAndWait();
 
-            Pane newPane = FXMLLoader.load(getClass().getResource("homePage.fxml"));
+            Pane newPane = FXMLLoader.load(getClass().getResource("/loginAndHome/homePage.fxml"));
             Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
             Main.primaryStage.show();
         } catch (Exception e) {
@@ -100,7 +104,7 @@ public class SavingsCreateAccount implements Initializable {
     private String accountNumberGenerator(String prev) {
         long val = Long.parseLong(prev);
         ++val;
-        Long temp = val;
+        long temp = val;
         int count = 0;
         while (temp > 0) {
             temp /= 10;

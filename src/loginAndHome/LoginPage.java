@@ -1,3 +1,5 @@
+package loginAndHome;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,10 +21,10 @@ public class LoginPage implements Initializable {
 
     private static Statement sqlStatement;
 
-    static String usernameString;
-    static String passwordString;
-    static String bankNameString;
-    static String bankCodeString;
+    public static String usernameString;
+    public static String passwordString;
+    public static String bankNameString;
+    public static String bankCodeString;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -31,16 +33,16 @@ public class LoginPage implements Initializable {
 
     static void login(ChoiceBox<String> bankName) {
         try {
-            String url = "jdbc:mysql://localhost:3306/bank_details?useSSL=false";
-            String username = "root";
+            String url = "jdbc:mysql://db4free.net:3306/bank_details?useSSL=false";
+            String username = "bank_root";
             String password = "password";
             Connection sqlConnection = DriverManager.getConnection(url, username, password);
             sqlStatement = sqlConnection.createStatement();
             @SuppressWarnings("SqlDialectInspection")
-            String query = "select distinct bank_name from employees_details;";
+            String query = "select distinct bank_branch_name from employees_details;";
             ResultSet sqlResult = sqlStatement.executeQuery(query);
             while (sqlResult.next()) {
-                bankName.getItems().add(sqlResult.getString("bank_name"));
+                bankName.getItems().add(sqlResult.getString("bank_branch_name"));
             }
             bankName.getSelectionModel().selectFirst();
         } catch (Exception e) {
@@ -59,7 +61,7 @@ public class LoginPage implements Initializable {
         passwordString = password.getText();
         bankNameString = bankName.getValue();
 
-        String query = "select bank_branch_code from employees_details where bank_name=\'" + bankNameString + "\'";
+        String query = "select bank_branch_code from employees_details where bank_branch_name=\'" + bankNameString + "\'";
         ResultSet sqlResult = sqlStatement.executeQuery(query);
         if (sqlResult.next()) {
             bankCodeString = sqlResult.getString("bank_branch_code");
@@ -79,12 +81,12 @@ public class LoginPage implements Initializable {
         }
 
         try {
-            String query = "select username, password, bank_name from employees_details";
+            String query = "select username, password, bank_branch_name from employees_details";
             ResultSet sqlResult = sqlStatement.executeQuery(query);
             while (sqlResult.next()) {
                 if (sqlResult.getString("username").equals(username.getText()) &&
                 sqlResult.getString("password").equals(password.getText()) &&
-                sqlResult.getString("bank_name").equals(bankName.getValue())) {
+                sqlResult.getString("bank_branch_name").equals(bankName.getValue())) {
                     return true;
                 }
             }

@@ -1,6 +1,9 @@
+package verifyIdentity;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
+import loginAndHome.LoginPage;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
