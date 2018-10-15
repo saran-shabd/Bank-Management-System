@@ -1,3 +1,5 @@
+package deleteAccount;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -5,6 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import loginAndHome.Main;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -49,7 +52,7 @@ public class SavingsDeleteAccount {
                 accountDeleted.setContentText("This account has been deleted");
                 accountDeleted.showAndWait();
 
-                Pane newPane = FXMLLoader.load(getClass().getResource("homePage.fxml"));
+                Pane newPane = FXMLLoader.load(getClass().getResource("/loginAndHome/homePage.fxml"));
                 Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
                 Main.primaryStage.show();
             }

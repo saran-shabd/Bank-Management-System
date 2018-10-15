@@ -1,3 +1,9 @@
+package loginAndHome;
+
+import verifyIdentity.*;
+import createAccount.*;
+import deleteAccount.*;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,7 +30,7 @@ public class HomePage {
     @FXML public void savingsCreateAccount() {
         if (new Verify().verifyPassword()) {
             try {
-                Pane tempPane = FXMLLoader.load(getClass().getResource("savingsCreateAccount.fxml"));
+                Pane tempPane = FXMLLoader.load(getClass().getResource("/createAccount/savingsCreateAccount.fxml"));
                 container.setCenter(tempPane);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -35,7 +41,7 @@ public class HomePage {
     @FXML public void savingsDeleteAccount() {
         if (new Verify().verifyPassword()) {
             try {
-                Pane tempPane = FXMLLoader.load(getClass().getResource("savingsDeleteAccount.fxml"));
+                Pane tempPane = FXMLLoader.load(getClass().getResource("/deleteAccount/savingsDeleteAccount.fxml"));
                 container.setCenter(tempPane);
             } catch (Exception e) {
                 e.printStackTrace();

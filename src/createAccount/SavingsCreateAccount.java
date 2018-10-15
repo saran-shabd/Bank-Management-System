@@ -1,3 +1,5 @@
+package createAccount;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -6,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import loginAndHome.LoginPage;
+import loginAndHome.Main;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -78,7 +82,7 @@ public class SavingsCreateAccount implements Initializable {
             confirmation.setContentText("Account Created Successfully");
             confirmation.showAndWait();
 
-            Pane newPane = FXMLLoader.load(getClass().getResource("homePage.fxml"));
+            Pane newPane = FXMLLoader.load(getClass().getResource("/loginAndHome/homePage.fxml"));
             Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
             Main.primaryStage.show();
         } catch (Exception e) {
@@ -100,7 +104,7 @@ public class SavingsCreateAccount implements Initializable {
     private String accountNumberGenerator(String prev) {
         long val = Long.parseLong(prev);
         ++val;
-        Long temp = val;
+        long temp = val;
         int count = 0;
         while (temp > 0) {
             temp /= 10;

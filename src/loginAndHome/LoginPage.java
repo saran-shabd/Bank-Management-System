@@ -1,3 +1,5 @@
+package loginAndHome;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,10 +21,10 @@ public class LoginPage implements Initializable {
 
     private static Statement sqlStatement;
 
-    static String usernameString;
-    static String passwordString;
-    static String bankNameString;
-    static String bankCodeString;
+    public static String usernameString;
+    public static String passwordString;
+    public static String bankNameString;
+    public static String bankCodeString;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
