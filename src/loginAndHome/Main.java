@@ -16,6 +16,7 @@ public class Main extends Application {
         Main.primaryStage.setTitle("Bank");
         Pane newPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
         Main.primaryStage.setScene(new Scene(newPane));
+        Main.primaryStage.setMaximized(true);
         Main.primaryStage.show();
     }
 

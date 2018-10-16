@@ -9,10 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import loginAndHome.Main;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SavingsDeleteAccount {
     @FXML TextField accountNumber, aadharNumber;
@@ -56,8 +53,14 @@ public class SavingsDeleteAccount {
                 Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
                 Main.primaryStage.show();
             }
+        } catch (SQLException e) {
+            Alert internetPoor = new Alert(Alert.AlertType.ERROR);
+            internetPoor.setContentText("Connection failed due to poor internet connection");
+            internetPoor.showAndWait();
         } catch (Exception e) {
-            e.printStackTrace();
+            Alert homePageNotLoad = new Alert(Alert.AlertType.ERROR);
+            homePageNotLoad.setContentText("Account could not be delete. Try Again");
+            homePageNotLoad.showAndWait();
         }
     }
 }

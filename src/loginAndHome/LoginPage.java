@@ -14,6 +14,8 @@ import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
+import static java.lang.System.exit;
+
 public class LoginPage implements Initializable {
     @FXML private TextField username;
     @FXML private PasswordField password;
@@ -45,13 +47,18 @@ public class LoginPage implements Initializable {
                 bankName.getItems().add(sqlResult.getString("bank_branch_name"));
             }
             bankName.getSelectionModel().selectFirst();
+        } catch (com.mysql.cj.jdbc.exceptions.CommunicationsException e) {
+            Alert internetProblem = new Alert(Alert.AlertType.ERROR);
+            internetProblem.setContentText("Connection Failed due to poor internet connection");
+            internetProblem.showAndWait();
+            exit(1);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    public void LogInOnAction() throws Exception {
+    public void LogInOnAction() {
         if (!validateUserLoginInput(username, password, bankName)) {
             ResetOnAction();
             return;
@@ -61,15 +68,31 @@ public class LoginPage implements Initializable {
         passwordString = password.getText();
         bankNameString = bankName.getValue();
 
-        String query = "select bank_branch_code from employees_details where bank_branch_name=\'" + bankNameString + "\'";
-        ResultSet sqlResult = sqlStatement.executeQuery(query);
-        if (sqlResult.next()) {
-            bankCodeString = sqlResult.getString("bank_branch_code");
+        try {
+            String query = "select bank_branch_code from employees_details where bank_branch_name=\'" + bankNameString + "\'";
+            ResultSet sqlResult = sqlStatement.executeQuery(query);
+            if (sqlResult.next()) {
+                bankCodeString = sqlResult.getString("bank_branch_code");
+            }
+        } catch (com.mysql.cj.jdbc.exceptions.CommunicationsException e) {
+            Alert internetProblem = new Alert(Alert.AlertType.ERROR);
+            internetProblem.setContentText("Connection Failed due to poor internet connection");
+            internetProblem.showAndWait();
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        Pane newPane = FXMLLoader.load(getClass().getResource("homePage.fxml"));
-        Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
-        Main.primaryStage.show();
+        //noinspection Duplicates
+        try {
+            Pane newPane = FXMLLoader.load(getClass().getResource("homePage.fxml"));
+            Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
+            Main.primaryStage.show();
+        } catch (Exception e) {
+            Alert homePageNotLoad = new Alert(Alert.AlertType.ERROR);
+            homePageNotLoad.setContentText("Home Page could not be loaded");
+            homePageNotLoad.showAndWait();
+        }
     }
 
     static boolean validateUserLoginInput(TextField username, PasswordField password, ChoiceBox<String> bankName) {
@@ -90,7 +113,12 @@ public class LoginPage implements Initializable {
                     return true;
                 }
             }
-        } catch (Exception e) {
+        } catch (com.mysql.cj.jdbc.exceptions.CommunicationsException e) {
+            Alert internetProblem = new Alert(Alert.AlertType.ERROR);
+            internetProblem.setContentText("Connection Failed due to poor internet connection");
+            internetProblem.showAndWait();
+            return false;
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 

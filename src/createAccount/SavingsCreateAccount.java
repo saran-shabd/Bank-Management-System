@@ -12,10 +12,7 @@ import loginAndHome.LoginPage;
 import loginAndHome.Main;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -85,8 +82,14 @@ public class SavingsCreateAccount implements Initializable {
             Pane newPane = FXMLLoader.load(getClass().getResource("/loginAndHome/homePage.fxml"));
             Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
             Main.primaryStage.show();
+        } catch (SQLException e) {
+            Alert internetPoor = new Alert(Alert.AlertType.ERROR);
+            internetPoor.setContentText("Connection failed due to poor internet connection");
+            internetPoor.showAndWait();
         } catch (Exception e) {
-            e.printStackTrace();
+            Alert homePageNotLoad = new Alert(Alert.AlertType.ERROR);
+            homePageNotLoad.setContentText("Account could not be created. Try Again");
+            homePageNotLoad.showAndWait();
         }
     }
 

@@ -1,14 +1,12 @@
 package verifyIdentity;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import loginAndHome.LoginPage;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class VerifyPassword {
     @FXML protected static Stage tempStage;
@@ -31,8 +29,10 @@ public class VerifyPassword {
                 }
             }
             tempStage.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            Alert internetPoor = new Alert(Alert.AlertType.ERROR);
+            internetPoor.setContentText("Connection Failed due to poor Internet Connection");
+            internetPoor.showAndWait();
         }
     }
 
