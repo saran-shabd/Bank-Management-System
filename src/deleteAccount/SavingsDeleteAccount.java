@@ -20,11 +20,8 @@ public class SavingsDeleteAccount {
             confirmation.setContentText("Are you sure?");
             confirmation.showAndWait();
             if (confirmation.getResult() == ButtonType.OK) {
-                String url = "jdbc:mysql://db4free.net:3306/user_details?useSSL=false";
-                String user = "bank_user";
-                String pass = "password";
-                Connection sqlConnection = DriverManager.getConnection(url, user, pass);
-                Statement sqlStatement = sqlConnection.createStatement();
+
+                Statement sqlStatement = databaseConnection.Connect.connectUserDB();
 
                 String query = "select aadhar_number from account_details where account_number = " + accountNumber.getText();
                 ResultSet sqlResult = sqlStatement.executeQuery(query);

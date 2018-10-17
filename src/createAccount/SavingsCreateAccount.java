@@ -41,11 +41,7 @@ public class SavingsCreateAccount implements Initializable {
         }
 
         try {
-            String url = "jdbc:mysql://db4free.net:3306/user_details?useSSL=false";
-            String user = "bank_user";
-            String pass = "password";
-            Connection sqlConnection = DriverManager.getConnection(url, user, pass);
-            Statement sqlStatement = sqlConnection.createStatement();
+            Statement sqlStatement = databaseConnection.Connect.connectUserDB();
 
             String query = "select account_number from account_details";
             ResultSet sqlResult = sqlStatement.executeQuery(query);
@@ -74,6 +70,14 @@ public class SavingsCreateAccount implements Initializable {
                     "\'" + accountNumber + "\')";
             sqlStatement.executeUpdate(query);
 
+            for (int i = 1; i <= 15; ++i) {
+                query = "insert into cheque_details(account_number, unique_code, validity) values " +
+                        "(\'" + accountNumber + "\'," +
+                        "" + i + "," +
+                        "" + 0 + ")";
+                sqlStatement.executeUpdate(query);
+            }
+
             Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
             confirmation.setHeaderText("Confirmation");
             confirmation.setContentText("Account Created Successfully");
@@ -83,6 +87,7 @@ public class SavingsCreateAccount implements Initializable {
             Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
             Main.primaryStage.show();
         } catch (SQLException e) {
+            e.printStackTrace();
             Alert internetPoor = new Alert(Alert.AlertType.ERROR);
             internetPoor.setContentText("Connection failed due to poor internet connection");
             internetPoor.showAndWait();

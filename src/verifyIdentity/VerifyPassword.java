@@ -16,11 +16,7 @@ public class VerifyPassword {
 
     @FXML public void confirmOnAction() {
         try {
-            String url = "jdbc:mysql://localhost:3306/bank_details?useSSL=false";
-            String user = "root";
-            String pass = "password";
-            Connection sqlConnection = DriverManager.getConnection(url, user, pass);
-            Statement sqlStatement = sqlConnection.createStatement();
+            Statement sqlStatement = databaseConnection.Connect.connectBankDB();
             String query = "select password from employees_details where username=\'" + LoginPage.usernameString + "\'";
             ResultSet sqlResult = sqlStatement.executeQuery(query);
             if (sqlResult.next()) {

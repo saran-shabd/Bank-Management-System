@@ -29,6 +29,18 @@ public class HomePage {
         Main.primaryStage.close();
     }
 
+    @FXML public void logoutOnAction() {
+        try {
+            Pane tempPane = FXMLLoader.load(getClass().getResource("loginPage.fxml"));
+            Main.primaryStage.setScene(new Scene(tempPane, 1000, 600));
+            Main.primaryStage.show();
+        } catch (Exception e) {
+            Alert homePageNotLoad = new Alert(Alert.AlertType.ERROR);
+            homePageNotLoad.setContentText("Home Page could not be loaded");
+            homePageNotLoad.showAndWait();
+        }
+    }
+
     @FXML public void savingsCreateAccount() {
         if (new Verify().verifyPassword()) {
             try {
@@ -62,6 +74,30 @@ public class HomePage {
         } catch (Exception e) {
             Alert homePageNotLoad = new Alert(Alert.AlertType.ERROR);
             homePageNotLoad.setContentText("View Account Page could not be loaded");
+            homePageNotLoad.showAndWait();
+        }
+    }
+
+    @FXML public void makeTransactionOnAction() {
+        if (new Verify().verifyPassword()) {
+            try {
+                Pane tempPane = FXMLLoader.load(getClass().getResource("/transactions/makeTransaction.fxml"));
+                container.setCenter(tempPane);
+            } catch (Exception e) {
+                Alert homePageNotLoad = new Alert(Alert.AlertType.ERROR);
+                homePageNotLoad.setContentText("Make Transaction Page could not be loaded");
+                homePageNotLoad.showAndWait();
+            }
+        }
+    }
+
+    @FXML public void viewTransactionsOnAction() {
+        try {
+            Pane tempPane = FXMLLoader.load(getClass().getResource("/transactions/viewTransaction.fxml"));
+            container.setCenter(tempPane);
+        } catch (Exception e) {
+            Alert homePageNotLoad = new Alert(Alert.AlertType.ERROR);
+            homePageNotLoad.setContentText("View Transactions Page could not be loaded");
             homePageNotLoad.showAndWait();
         }
     }

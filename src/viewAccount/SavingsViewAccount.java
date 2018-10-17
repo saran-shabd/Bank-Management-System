@@ -27,12 +27,7 @@ public class SavingsViewAccount implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            String url = "jdbc:mysql://db4free.net:3306/user_details?useSSL=false";
-            String user = "bank_user";
-            String password = "password";
-
-            Connection sqlConnection = DriverManager.getConnection(url, user, password);
-            sqlStatement = sqlConnection.createStatement();
+            sqlStatement = databaseConnection.Connect.connectUserDB();
         } catch (com.mysql.cj.jdbc.exceptions.CommunicationsException e) {
             Alert internetProblem = new Alert(Alert.AlertType.ERROR);
             internetProblem.setContentText("Connection Failed due to poor internet connection");

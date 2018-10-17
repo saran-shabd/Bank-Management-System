@@ -15,6 +15,7 @@
                 <Menu mnemonicParsing="false" text="Desktop">
                   <items>
                         <MenuItem mnemonicParsing="false" onAction="#homeScreen" text="HomeScreen" />
+                        <MenuItem mnemonicParsing="false" onAction="#logoutOnAction" text="Logout" />
                     <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
                   </items>
                 </Menu>
@@ -25,6 +26,12 @@
                         <MenuItem mnemonicParsing="false" onAction="#savingsViewAccount" text="View Account(s)" />
                      </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Transactions">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#makeTransactionOnAction" text="Make Transaction" />
+                        <MenuItem mnemonicParsing="false" onAction="#viewTransactionsOnAction" text="View Tranasactions" />
+                    </items>
+                  </Menu>
               </menus>
             </MenuBar>
          </children>

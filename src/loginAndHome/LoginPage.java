@@ -35,11 +35,7 @@ public class LoginPage implements Initializable {
 
     static void login(ChoiceBox<String> bankName) {
         try {
-            String url = "jdbc:mysql://db4free.net:3306/bank_details?useSSL=false";
-            String username = "bank_root";
-            String password = "password";
-            Connection sqlConnection = DriverManager.getConnection(url, username, password);
-            sqlStatement = sqlConnection.createStatement();
+            sqlStatement = databaseConnection.Connect.connectBankDB();
             @SuppressWarnings("SqlDialectInspection")
             String query = "select distinct bank_branch_name from employees_details;";
             ResultSet sqlResult = sqlStatement.executeQuery(query);
