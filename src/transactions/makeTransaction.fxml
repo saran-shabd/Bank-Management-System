@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="transactions.MakeTransaction">
    <center>
       <AnchorPane prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+         <children>
+            <VBox layoutX="287.0" layoutY="100.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label text="Cheque Number" />
+                        <TextField fx:id="chequeNumber" onAction="#submitOnAction" prefHeight="25.0" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label text="Account Number from" />
+                        <TextField fx:id="fromAccount" onAction="#submitOnAction" prefHeight="30.0" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label text="Account Number to" />
+                        <TextField fx:id="toAccount" onAction="#submitOnAction" prefHeight="30.0" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="75.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Label text="Amoun to transfer (Rs.)" />
+                        <TextField fx:id="amount" onAction="#submitOnAction" prefHeight="30.0" prefWidth="200.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#submitOnAction" prefHeight="30.0" prefWidth="200.0" text="Make Transaction" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children></AnchorPane>
    </center>
 </BorderPane>

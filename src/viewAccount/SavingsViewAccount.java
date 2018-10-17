@@ -64,6 +64,10 @@ public class SavingsViewAccount implements Initializable {
             table.setItems(null);
             table.setItems(data);
 
+            Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
+            confirmation.setContentText("Your record(s) are ready");
+            confirmation.show();
+
         } catch (com.mysql.cj.jdbc.exceptions.CommunicationsException e) {
             Alert internetProblem = new Alert(Alert.AlertType.ERROR);
             internetProblem.setContentText("Connection Failed due to poor internet connection");
@@ -98,6 +102,10 @@ public class SavingsViewAccount implements Initializable {
 
             table.setItems(null);
             table.setItems(data);
+
+            Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
+            confirmation.setContentText("Your record(s) are ready");
+            confirmation.show();
 
         } catch (com.mysql.cj.jdbc.exceptions.CommunicationsException e) {
             Alert internetProblem = new Alert(Alert.AlertType.ERROR);
