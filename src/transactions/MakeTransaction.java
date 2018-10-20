@@ -3,6 +3,7 @@ package transactions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import loginAndHome.LoginPage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -62,11 +63,12 @@ public class MakeTransaction {
                     tempQuery = "update cheque_details set validity = 1 where account_number = " + fromAccount.getText() + " and unique_code = " + chequeNumber.getText();
                     tempSqlStatement.executeUpdate(tempQuery);
 
-                    tempQuery = "insert into transactions(account_number, transfer_amount, date, medium, to_account_number) values " +
+                    tempQuery = "insert into transactions(account_number, transfer_amount, date, medium, bank_branch_code, to_account_number) values " +
                     "(\'" + fromAccount.getText() + "\'," +
                     "\'" + amount.getText() + "\'," +
                     "\'" + LocalDate.now().toString() + "\'," +
                     "\'" + "CHEQUE" + "\'," +
+                    "\'" + LoginPage.bankCodeString + "\'," +
                     "\'" + toAccount.getText() + "\')";
                     tempSqlStatement.executeUpdate(tempQuery);
 

@@ -8,6 +8,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import loginAndHome.LoginPage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,10 +42,12 @@ public class ViewTransaction {
 
             int i = 1;
             while (sqlResult.next()) {
-                data.add(new TransactionDetails(Integer.toString(i), sqlResult.getString("date"),
-                        sqlResult.getString("account_number"), sqlResult.getString("to_account_number"),
-                        sqlResult.getString("transfer_amount"), sqlResult.getString("medium")));
-                ++i;
+                if (LoginPage.bankCodeString.equals(sqlResult.getString("bank_branch_code"))) {
+                    data.add(new TransactionDetails(Integer.toString(i), sqlResult.getString("date"),
+                            sqlResult.getString("account_number"), sqlResult.getString("to_account_number"),
+                            sqlResult.getString("transfer_amount"), sqlResult.getString("medium")));
+                    ++i;
+                }
             }
 
             serialNumber.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
@@ -82,10 +85,12 @@ public class ViewTransaction {
 
             int i = 1;
             while (sqlResult.next()) {
-                data.add(new TransactionDetails(Integer.toString(i), sqlResult.getString("date"),
-                        sqlResult.getString("account_number"), sqlResult.getString("to_account_number"),
-                        sqlResult.getString("transfer_amount"), sqlResult.getString("medium")));
-                ++i;
+                if (LoginPage.bankCodeString.equals(sqlResult.getString("bank_branch_code"))) {
+                    data.add(new TransactionDetails(Integer.toString(i), sqlResult.getString("date"),
+                            sqlResult.getString("account_number"), sqlResult.getString("to_account_number"),
+                            sqlResult.getString("transfer_amount"), sqlResult.getString("medium")));
+                    ++i;
+                }
             }
 
             serialNumber.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));

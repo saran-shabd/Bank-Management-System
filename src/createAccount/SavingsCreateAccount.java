@@ -43,7 +43,7 @@ public class SavingsCreateAccount implements Initializable {
         try {
             Statement sqlStatement = databaseConnection.Connect.connectUserDB();
 
-            String query = "select account_number from account_details";
+            String query = "select account_number from account_details where bank_branch_code = " + LoginPage.bankCodeString;
             ResultSet sqlResult = sqlStatement.executeQuery(query);
             String temp = null;
             while (sqlResult.next()) {
