@@ -32,7 +32,6 @@ public class SavingsViewAccount implements Initializable {
             Alert internetProblem = new Alert(Alert.AlertType.ERROR);
             internetProblem.setContentText("Connection Failed due to poor internet connection");
             internetProblem.showAndWait();
-            return;
         } catch (SQLException e) {
             e.printStackTrace();
         }

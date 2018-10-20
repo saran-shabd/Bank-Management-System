@@ -5,7 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class UserDetailsClass {
     private SimpleStringProperty name, dob, address, phoneNumber, email, aadharNumber, bankBranchCode, accountBalance, accountNumber;
 
-    public UserDetailsClass(String name, String dob, String address, String phoneNumber, String email, String aadharNumber, String bankBranchCode, String accountBalance, String accountNumber) {
+    UserDetailsClass(String name, String dob, String address, String phoneNumber, String email, String aadharNumber, String bankBranchCode, String accountBalance, String accountNumber) {
         this.name = new SimpleStringProperty(name);
         this.dob = new SimpleStringProperty(dob);
         this.address = new SimpleStringProperty(address);

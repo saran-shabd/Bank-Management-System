@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class MakeTransaction {
     @FXML private TextField chequeNumber, fromAccount, toAccount, amount;
@@ -59,6 +60,14 @@ public class MakeTransaction {
                     tempSqlStatement.executeUpdate(tempQuery);
 
                     tempQuery = "update cheque_details set validity = 1 where account_number = " + fromAccount.getText() + " and unique_code = " + chequeNumber.getText();
+                    tempSqlStatement.executeUpdate(tempQuery);
+
+                    tempQuery = "insert into transactions(account_number, transfer_amount, date, medium, to_account_number) values " +
+                    "(\'" + fromAccount.getText() + "\'," +
+                    "\'" + amount.getText() + "\'," +
+                    "\'" + LocalDate.now().toString() + "\'," +
+                    "\'" + "CHEQUE" + "\'," +
+                    "\'" + toAccount.getText() + "\')";
                     tempSqlStatement.executeUpdate(tempQuery);
 
                     Alert confirmation = new Alert(Alert.AlertType.INFORMATION);
