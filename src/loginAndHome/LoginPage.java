@@ -83,6 +83,7 @@ public class LoginPage implements Initializable {
         try {
             Pane newPane = FXMLLoader.load(getClass().getResource("homePage.fxml"));
             Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
+            Main.primaryStage.setMaximized(true);
             Main.primaryStage.show();
         } catch (Exception e) {
             Alert homePageNotLoad = new Alert(Alert.AlertType.ERROR);

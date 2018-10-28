@@ -13,7 +13,7 @@ public class Verify extends VerifyPassword {
         try {
             Pane tempPane = FXMLLoader.load(getClass().getResource("verifyPassword.fxml"));
             tempStage = new Stage();
-            tempStage.setScene(new Scene(tempPane, 600, 400));
+            tempStage.setScene(new Scene(tempPane, 1000, 600));
             tempStage.showAndWait();
         } catch (Exception e) {
             Alert homePageNotLoad = new Alert(Alert.AlertType.ERROR);

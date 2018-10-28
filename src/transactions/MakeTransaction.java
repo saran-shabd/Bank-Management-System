@@ -15,6 +15,14 @@ public class MakeTransaction {
 
     @FXML public void submitOnAction() {
         try {
+            if (chequeNumber.getText().equals("") || fromAccount.getText().equals("") ||
+            toAccount.getText().equals("") || amount.getText().equals("")) {
+                Alert invalidInput = new Alert(Alert.AlertType.ERROR);
+                invalidInput.setContentText("Some entries may be missing");
+                invalidInput.show();
+                return;
+            }
+
             Statement sqlStatement = databaseConnection.Connect.connectUserDB();
 
             String query = "select unique_code, validity from cheque_details where account_number = " + fromAccount.getText();
@@ -41,8 +49,7 @@ public class MakeTransaction {
                     int currBalance = 0;
 
                     if (tempSqlResult.next()) {
-                        if (Integer.parseInt(tempSqlResult.getString("account_balance")) <
-                                Integer.parseInt(amount.getText())) {
+                        if (Integer.parseInt(tempSqlResult.getString("account_balance")) < Integer.parseInt(amount.getText())) {
 
                             Alert insufficientAmount = new Alert(Alert.AlertType.ERROR);
                             insufficientAmount.setContentText("Insufficient balance");

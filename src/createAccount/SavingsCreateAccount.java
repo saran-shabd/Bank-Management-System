@@ -85,6 +85,7 @@ public class SavingsCreateAccount implements Initializable {
 
             Pane newPane = FXMLLoader.load(getClass().getResource("/loginAndHome/homePage.fxml"));
             Main.primaryStage.setScene(new Scene(newPane, 1000, 600));
+            Main.primaryStage.setMaximized(true);
             Main.primaryStage.show();
         } catch (SQLException e) {
             e.printStackTrace();

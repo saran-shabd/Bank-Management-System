@@ -41,6 +41,9 @@ public class SavingsDeleteAccount {
                 query = "delete from account_details where account_number = " + accountNumber.getText();
                 sqlStatement.executeUpdate(query);
 
+                query = "delete from cheque_details where account_number = " + accountNumber.getText();
+                sqlStatement.executeUpdate(query);
+
 
                 Alert accountDeleted = new Alert(Alert.AlertType.INFORMATION);
                 accountDeleted.setContentText("This account has been deleted");
