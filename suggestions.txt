@@ -1,0 +1,1 @@
+switch root rather than switching scenes to solve Main.primaryScene.setMaximized(true); problem
